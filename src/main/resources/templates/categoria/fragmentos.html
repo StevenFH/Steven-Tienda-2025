@@ -188,21 +188,7 @@
                 </div>
             </div>
         </section>
-        <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const confirmModal = document.getElementById('confirmModal');
-    confirmModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        const id = button.getAttribute('data-bs-id');
-        const descripcion = button.getAttribute('data-bs-descripcion');
-
-        // Asigna los valores al modal
-        confirmModal.querySelector('#modalId').value = id;
-        confirmModal.querySelector('#modalDescripcion').textContent = descripcion;
-    });
-});
-</script>
-
+        
  
     </body>
 </html>
