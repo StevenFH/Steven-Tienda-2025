@@ -1,7 +1,7 @@
-package tienda.controller;
+package TiendaSteve.controller;
 
-import tienda.services.CategoriaService;
-import tienda.services.ProductoService;
+import TiendaSteve.services.CategoriaService;
+import TiendaSteve.services.ProductoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,7 @@ public class IndexController {
     }
     
     @GetMapping("/consultas/{idCategoria}")
-    public String listado(@PathVariable("idCategoria") Integer idCategoria, Model model) {
+    public String listado(@PathVariable("idCategoria") Long idCategoria, Model model) {
         model.addAttribute("idCategoriaActual", idCategoria);
         var categoriaOptional = categoriaService.getCategoria(idCategoria);
         if (categoriaOptional.isEmpty()) {
