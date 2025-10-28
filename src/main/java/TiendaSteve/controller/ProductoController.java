@@ -1,6 +1,6 @@
 package TiendaSteve.controller;
 
-import TiendaSteve.services.CategoriaServices;
+import TiendaSteve.services.CategoriaService;
 import TiendaSteve.services.ProductoService;
 import TiendaSteve.domain.Producto;
 import TiendaSteve.services.FirebaseStorageService;
@@ -19,17 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
 @Controller
-@RequestMapping("/categoria")
+@RequestMapping("/producto")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
 
     @Autowired
-    private CategoriaServices categoriaService;
+    private CategoriaService categoriaService;
 
     @GetMapping("/listado")
     public String listado(Model model) {
@@ -73,7 +71,7 @@ public class ProductoController {
         return "redirect:/producto/listado";
     }
 
-    @GetMapping("/modificar/{idProducto}")
+    @GetMapping("/usuaio/modificar/{idUsuario}")
     public String modificar(@PathVariable("idProducto") Long idProducto, Model model, RedirectAttributes redirectAttributes) {
         Optional<Producto> productoOpt = productoService.getProducto(idProducto);
         if (productoOpt.isEmpty()) {

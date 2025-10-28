@@ -1,4 +1,3 @@
-
 package TiendaSteve.services;
 
 import TiendaSteve.domain.Producto;
@@ -15,24 +14,23 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ProductoService {
 
-    //Permite crear una única instancia de ProductoService, y la crea automáticamente
     @Autowired
     private ProductoRepository productoRepository;
-
-    @Transactional(readOnly = true)
+    
+    @Transactional(readOnly=true)
     public List<Producto> getProductos(boolean activo) {
         if (activo) {
             return productoRepository.findByActivoTrue();
         }
         return productoRepository.findAll();
     }
-
+    
     @Transactional(readOnly = true)
-    public Optional<Producto> getProducto(Long idProducto){
+    public Optional<Producto> getProducto(Long idProducto) {
         return productoRepository.findById(idProducto);
     }
-    
 
+    @Autowired
     private FirebaseStorageService firebaseStorageService;
 
     @Transactional
@@ -50,21 +48,19 @@ public class ProductoService {
             }
         }
     }
-    
-    
-        @Transactional
+
+    @Transactional
     public void delete(Long idProducto) {
-        // Verifica si la categoría existe antes de intentar eliminarlo
+        // Verifica si el producto existe antes de intentar eliminarlo
         if (!productoRepository.existsById(idProducto)) {
             // Lanza una excepción para indicar que el usuario no fue encontrado
-            throw new IllegalArgumentException("La categoría con ID " + idProducto + " no existe.");
+            throw new IllegalArgumentException("El producto con ID " + idProducto + " no existe.");
         }
         try {
             productoRepository.deleteById(idProducto);
         } catch (DataIntegrityViolationException e) {
             // Lanza una nueva excepción para encapsular el problema de integridad de datos
-            throw new IllegalStateException("No se puede eliminar la categoria. Tiene datos asociados.", e);
+            throw new IllegalStateException("No se puede eliminar el producto. Tiene datos asociados.", e);
         }
     }
 }
-

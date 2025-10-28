@@ -10,21 +10,21 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
- 
+
 @Service
-public class CategoriaServices {
+public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
-
-    @Transactional(readOnly = true)
+    
+    @Transactional(readOnly=true)
     public List<Categoria> getCategorias(boolean activo) {
         if (activo) {
             return categoriaRepository.findByActivoTrue();
         }
         return categoriaRepository.findAll();
     }
-
+    
     @Transactional(readOnly = true)
     public Optional<Categoria> getCategoria(Long idCategoria) {
         return categoriaRepository.findById(idCategoria);
@@ -63,5 +63,4 @@ public class CategoriaServices {
             throw new IllegalStateException("No se puede eliminar la categoria. Tiene datos asociados.", e);
         }
     }
-
 }
