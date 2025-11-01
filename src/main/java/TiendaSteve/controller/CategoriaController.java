@@ -1,6 +1,7 @@
 package TiendaSteve.controller;
 
 import TiendaSteve.services.CategoriaService;
+import TiendaSteve.services.ProductoService;
 import TiendaSteve.domain.Categoria;
 import jakarta.validation.Valid;
 import java.util.Locale;
@@ -23,6 +24,9 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+    
+    @Autowired
+    private ProductoService productoService;
     
     @GetMapping("/listado")
     public String listado(Model model) {

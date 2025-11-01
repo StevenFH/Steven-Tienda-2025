@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 public interface ProductoRepository extends JpaRepository<Producto,Long>{
     public List<Producto> findByActivoTrue();
     
-    //Eejemplo de metodo utlizado para consultas derivadas
+    //Ejemplo de metodo utlizado para consultas derivadas
     public List<Producto> findByPrecioBetweenOrderByPrecioAsc(double precioInf, double precioSup);
     
     //Ejemplo de metood utilizado para consultas JPQL
