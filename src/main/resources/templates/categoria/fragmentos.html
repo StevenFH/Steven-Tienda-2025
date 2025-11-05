@@ -10,14 +10,14 @@
             <!-- Button trigger modal -->
             <div class='row py-4 mb-2 bg-light'>
                 <div class='col-md-1'></div>
-                <div class='col-md-3'>
+                <div class='col-md-3'  sec:authorize="hasRole('ROLE_ADMIN')">
                     <button type="button" class="btn btn-primary"  sec:authorize="hasRole('ROLE_ADMIN')"
                             data-bs-toggle="modal" data-bs-target="#agregarCategoriaModal">
                         <i class="fa-solid fa-plus"></i> [[#{categoria.agregar}]]</button>
                 </div>
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="agregarCategoriaModal"  tabindex="-1"
+            <div class="modal fade" id="agregarCategoriaModal"  tabindex="-1" 
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- fragmento 2 para el listado de categorias -->
         <section th:fragment="listado" class="p-3">
             <div class="row p-3">
@@ -68,7 +68,7 @@
                                             <th>[[#{categoria.descripcion}]]</th>
                                             <th>[[#{categoria.imagen}]]</th>
                                             <th>[[#{categoria.activo}]]</th>
-                                            <th></th>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -77,7 +77,7 @@
                                             <td>[[${c.descripcion}]]</td>
                                             <td><img th:src="@{${c.rutaImagen}}" alt="noData" height="75"/></td>
                                             <td th:text="${c.activo} ? 'Activa':'Inactiva'"></td>
-                                            <td>
+                                            <td  sec:authorize="hasRole('ROLE_ADMIN')">
                                                 <button type="button" class="btn btn-danger"
                                                         data-bs-toggle="modal" data-bs-target="#confirmModal"
                                                         th:data-bs-id="${c.idCategoria}"
@@ -104,13 +104,13 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- 3 Fragmento que se utiliza en la página modifca.html -->
         <section th:fragment="editar">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form method="POST" th:action="@{/categoria/guardar}"
+                    <form method="POST" th:action="@{/categoria/guardar}" 
                           th:object="${categoria}" class="was-validated" enctype="multipart/form-data">
                         <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
                         <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
@@ -131,12 +131,12 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label for="descripcion">[[#{categoria.descripcion}]]</label>
-                                            <input type="text" class="form-control" name="descripcion"
+                                            <input type="text" class="form-control" name="descripcion" 
                                                    th:field="*{descripcion}" required="true"/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="activo">[[#{categoria.activo}]]</label>
-                                            <input class="form-check-input" type="checkbox"
+                                            <input class="form-check-input" type="checkbox" 
                                                    name="activo" id="activo" th:field="*{activo}"/>
                                         </div>
                                         <div class="mb-3">
@@ -153,13 +153,13 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- 4 fragmento que se utiliza para confirmar que se desea eliminar una categoria -->
         <section th:fragment="confirmarEliminar">
-            <div class="modal fade"
-                 id="confirmModal"
-                 tabindex="-1"
-                 aria-labelledby="modalLabel"
+            <div class="modal fade" 
+                 id="confirmModal" 
+                 tabindex="-1" 
+                 aria-labelledby="modalLabel" 
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered custom-modal-animation">
                     <div class="modal-content animate-slide-up">
@@ -188,7 +188,6 @@
                 </div>
             </div>
         </section>
-        
- 
+
     </body>
 </html>
