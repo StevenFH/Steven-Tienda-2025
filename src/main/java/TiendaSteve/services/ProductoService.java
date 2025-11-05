@@ -78,6 +78,12 @@ public class ProductoService {
     public List<Producto> consultaSQL(double precioInf, double precioSup) {
         return productoRepository.consultaSQL(precioInf, precioSup);
     }
+    
+    //Consulta ampliada (TAREA #2)
+    @Transactional(readOnly = true)
+    public List<Producto> consultaAmpliacion(int existenciasInf, int existenciasSup) {
+        return productoRepository.findByExistenciasBetweenOrderByExistenciasDesc(existenciasInf, existenciasSup);
+    }
 
     
 }
