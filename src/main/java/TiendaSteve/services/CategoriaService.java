@@ -64,18 +64,4 @@ public class CategoriaService {
         }
     }
     
-        @Transactional(readOnly = true)
-    public List<Categoria> consultaDerivada(double precioInf, double precioSup) {
-        return categoriaRepository.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Categoria> consultaJPQL(double precioInf, double precioSup) {
-        return categoriaRepository.consultaJPQL(precioInf, precioSup);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Categoria> consultaSQL(double precioInf, double precioSup) {
-        return categoriaRepository.consultaSQL(precioInf, precioSup);
-    }
 }
